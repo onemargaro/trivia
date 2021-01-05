@@ -1,7 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require("dotenv-webpack");
 const path = require("path");
-// commonJS
+
 module.exports = {
   entry: "./src/index.js",
   module: {
@@ -36,12 +37,13 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
-      chunkFilename: "[id].css", // esto es para manejar muchas lineas de codigo
+      chunkFilename: "[id].css",
     }),
   ],
   devServer: {
