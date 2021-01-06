@@ -1,1 +1,2 @@
-console.log(process.env);
+import './config/api';
+import './services/api';

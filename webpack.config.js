@@ -1,11 +1,13 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
 const path = require("path");
 
 module.exports = {
   entry: "./src/index.js",
-  mode: "development",
+  target: "web",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -38,7 +40,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv(),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(dotenv.config().parsed), // it will automatically pick up key values from .env file
+    }),
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
@@ -46,10 +50,13 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     static: [path.resolve(__dirname, "dist")],
-    compress: true,
+    open: false, // Set to true to auto-open the asset url
+    compress: true, // Enable local gzip compression
+    hot: true,
     port: 9000,
   },
   output: {

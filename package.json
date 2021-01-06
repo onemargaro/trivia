@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "format": "prettier --write ./src",
-    "dev:start": "webpack-dev-server",
+    "start": "webpack serve --watch",
     "lint": "eslint ./src"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "webpack-dev-server": "^4.0.0-beta.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "tailwindcss": "^2.0.2"
   }
 }
