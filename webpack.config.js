@@ -7,6 +7,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   target: "web",
+  mode: "development",
   devtool: "inline-source-map",
   module: {
     rules: [
@@ -30,10 +31,6 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpg|svg|jpeg|gif)$/,
-        use: ["file-loader"],
-      },
-      {
         test: /\.(sass|scss)$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
@@ -46,18 +43,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css",
-    }),
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    static: [path.resolve(__dirname, "dist")],
-    open: false, // Set to true to auto-open the asset url
-    compress: true, // Enable local gzip compression
-    hot: true,
+    contentBase: path.resolve(__dirname, "dist"),
+    hot: false,
+    host: 'localhost',
     port: 9000,
+    writeToDisk: true
   },
   output: {
     publicPath: "./",
