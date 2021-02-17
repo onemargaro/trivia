@@ -1,5 +1,3 @@
-import axios from "axios";
-// axios.get("/api_category.php").then((categories) => console.log(categories));
-console.log("Holi")
-console.log("Holi")
-console.log("Holi")
+import axios from 'axios';
+axios.defaults.baseURL = process.env.BASE_URL;
+axios.get("/api_category.php").then((categories) => console.log(categories));
