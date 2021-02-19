@@ -1,1 +1,1 @@
-import './services/api';
+import './actions/generate';
