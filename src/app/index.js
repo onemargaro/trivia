@@ -15,6 +15,13 @@ import { generateTrivia } from './services/api';
 
 initSelectOptions();
 
+// avoid weird characters to parse as common text
+const decodeHTMLEntities = (text) => {
+  let textArea = document.createElement('textarea');
+  textArea.innerHTML = text;
+  return textArea.value;
+};
+
 // remove on this way due to innerHTML = "" doesnt remove event handlers
 // and to void memory leaks
 const removeAllChildNodes = (parent) => {
@@ -32,7 +39,7 @@ const showQuestion = (question) => {
   // clean question container;
   removeAllChildNodes(triviaQuestionElement);
   removeAllChildNodes(triviaOptionsElement);
-  const questionNode = document.createTextNode(question.question);
+  const questionNode = document.createTextNode(decodeHTMLEntities(question.question));
   triviaQuestionElement.appendChild(questionNode);
   // making sure to randomize answers
   const answers = [...question.incorrect_answers, question.correct_answer].sort(() => Math.random() - 0.5);
@@ -40,7 +47,7 @@ const showQuestion = (question) => {
     const labelElement = document.createElement('label');
     const inputRadio = document.createElement('input');
     const answerContainer = document.createElement('span');
-    const answerNode = document.createTextNode(answer);
+    const answerNode = document.createTextNode(decodeHTMLEntities(answer));
     inputRadio.type = 'radio';
     inputRadio.name = 'triviaAnswer';
     inputRadio.classList.add('form-radio', 'h-5', 'w-5', 'text-purple-600');
