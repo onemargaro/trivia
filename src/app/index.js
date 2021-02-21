@@ -10,7 +10,7 @@ import {
   triviaQuestionElement,
   typesSelect
 } from './selectors';
-import { TYPES, ANSWER_VALUE, AMOUNT } from './config/constants';
+import { ANSWER_VALUE, AMOUNT } from './config/constants';
 import { generateTrivia } from './services/api';
 
 initSelectOptions();
@@ -28,7 +28,7 @@ const showTriviaForm = () => {
   triviaElement.classList.add('hidden');
 };
 
-const showQuestion = (question, type) => {
+const showQuestion = (question) => {
   // clean question container;
   removeAllChildNodes(triviaQuestionElement);
   removeAllChildNodes(triviaOptionsElement);
@@ -71,7 +71,7 @@ const setTriviaPoints = (points) => {
 const startTrivia = (questions, type) => {
   if (questions.length === 0) {
     alert('There is no question to load');
-    return showFormTrivia();
+    return showTriviaForm();
   }
   let indexQuestion = 0;
   let userPoints = 0;
