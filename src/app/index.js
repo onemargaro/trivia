@@ -76,6 +76,7 @@ const startTrivia = (questions, type) => {
   let indexQuestion = 0;
   let userPoints = 0;
   setTriviaPoints(userPoints);
+  removeAllChildNodes(triviaButtonElement);
   const initialNodeText = document.createTextNode(`Next`);
   triviaButtonElement.appendChild(initialNodeText);
   formElement.classList.add('hidden');
